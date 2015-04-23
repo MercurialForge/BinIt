@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+*.sdf
+*.suo
+*.doc
+*.filters
+*.user
+*.vcxproj
