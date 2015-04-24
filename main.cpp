@@ -6,7 +6,7 @@
 * contact: oliver@mercurialforge.com
 */
 
-#include <dirent.h> // directory header
+#include "dirent.h" // directory header
 #include <iostream>
 #include <fstream>
 #include <string>

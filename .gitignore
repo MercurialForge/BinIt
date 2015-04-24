@@ -31,4 +31,6 @@
 *.doc
 *.filters
 *.user
-*.vcxproj
+*Debug/
+*Release/
+*.opensdf
