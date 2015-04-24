@@ -25,7 +25,7 @@ const CHAR* ConfigFileName = ".\\Config.ini";
 char CharacterInput;
 string CommandInput;
 bool bIsExiting = false;
-TCHAR desktop[MAX_PATH];
+CHAR desktop[MAX_PATH];
 int binCount;
 
 //======================================================================================================================
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 		"	replaced with any directory you want to clean\"\n"
 		"\n");
 
-	GetPrivateProfileString("Settings", "DesktopPath", NULL, desktop, MAX_PATH, ConfigFileName);
+	GetPrivateProfileString(LPCTSTR("Settings"), LPCTSTR("DesktopPath"), NULL, LPTSTR(desktop), MAX_PATH, LPCTSTR(ConfigFileName));
 
 	// welcome the user
 	printf("Welcome to BinIt the desktop clean up app.\n");
@@ -133,7 +133,7 @@ void ListDir(const char *path, vector<string> &files)
 //======================================================================================================================
 void CreateFolder(const string path)
 {
-	CreateDirectory(path.c_str(), NULL);
+	CreateDirectory(LPCTSTR(path.c_str()), NULL);
 }
 
 //======================================================================================================================
@@ -211,7 +211,7 @@ void BinIt()
 			cout << "Moving file:" << file << '\n';
 			string FileToMove = string(desktop) + "\\" + file;
 			string MoveToFile = BinitFolderPath + "\\" + file;
-			MoveFile(FileToMove.c_str(), MoveToFile.c_str());
+			MoveFile(LPCTSTR(FileToMove.c_str()), LPCTSTR(MoveToFile.c_str()));
 			binCount++;
 		}
 	}
@@ -226,7 +226,7 @@ void BinIt()
 void GetDesktop()
 {
 	// get the current desktop
-	if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY | CSIDL_FLAG_CREATE, NULL, SHGFP_TYPE_CURRENT, desktop))){}
+	if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY | CSIDL_FLAG_CREATE, NULL, SHGFP_TYPE_CURRENT, LPWSTR(desktop)))){}
 	else
 	{
 		// some fucked up shit happened
@@ -246,13 +246,13 @@ void GetDesktop()
 
 	if (CharacterInput == 'y' || CharacterInput == 'Y')
 	{
-		WritePrivateProfileString("Settings", "DesktopPath", desktop, ConfigFileName);
+		WritePrivateProfileString(LPCTSTR("Settings"), LPCTSTR("DesktopPath"), LPCTSTR(desktop), LPCTSTR(ConfigFileName));
 		printf("\n");
 	}
 	else if (CharacterInput == 'n' || CharacterInput == 'N')
 	{
 		printf("Well, something must be wrong with your pc or settings. It could also be the code. You can branch and fix it at http://www.github.com/mercurialforge/BinIt \n\n");
-		WritePrivateProfileString("Settings", "DesktopPath", "", ConfigFileName);
+		WritePrivateProfileString(LPCTSTR("Settings"), LPCTSTR("DesktopPath"), LPCTSTR(""), LPCTSTR(ConfigFileName));
 		bIsExiting = true;
 	}
 	else

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinIt", "BinIt.vcxproj", "{E4E4F6E9-6585-46D9-8EB1-15731CCB7BA8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BinIt", "BinIt.vcxproj", "{9F09B516-9125-4F51-9546-0CC0E4EF4823}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E4E4F6E9-6585-46D9-8EB1-15731CCB7BA8}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E4E4F6E9-6585-46D9-8EB1-15731CCB7BA8}.Debug|Win32.Build.0 = Debug|Win32
-		{E4E4F6E9-6585-46D9-8EB1-15731CCB7BA8}.Release|Win32.ActiveCfg = Release|Win32
-		{E4E4F6E9-6585-46D9-8EB1-15731CCB7BA8}.Release|Win32.Build.0 = Release|Win32
+		{9F09B516-9125-4F51-9546-0CC0E4EF4823}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9F09B516-9125-4F51-9546-0CC0E4EF4823}.Debug|Win32.Build.0 = Debug|Win32
+		{9F09B516-9125-4F51-9546-0CC0E4EF4823}.Release|Win32.ActiveCfg = Release|Win32
+		{9F09B516-9125-4F51-9546-0CC0E4EF4823}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
