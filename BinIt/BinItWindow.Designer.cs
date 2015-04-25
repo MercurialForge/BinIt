@@ -41,8 +41,8 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.m_ignoreFolders = new System.Windows.Forms.CheckBox();
             this.m_bUseSnapshots = new System.Windows.Forms.CheckBox();
+            this.m_ignoreFolders = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -77,7 +77,7 @@
             this.TargetDesktop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TargetDesktop.Location = new System.Drawing.Point(3, 0);
             this.TargetDesktop.Name = "TargetDesktop";
-            this.TargetDesktop.Size = new System.Drawing.Size(58, 14);
+            this.TargetDesktop.Size = new System.Drawing.Size(99, 13);
             this.TargetDesktop.TabIndex = 2;
             this.TargetDesktop.Text = "Target Desktop:";
             // 
@@ -96,7 +96,7 @@
             // m_desktopLabel
             // 
             this.m_desktopLabel.AutoSize = true;
-            this.m_desktopLabel.Location = new System.Drawing.Point(80, 0);
+            this.m_desktopLabel.Location = new System.Drawing.Point(124, 0);
             this.m_desktopLabel.Name = "m_desktopLabel";
             this.m_desktopLabel.Size = new System.Drawing.Size(22, 13);
             this.m_desktopLabel.TabIndex = 4;
@@ -115,7 +115,7 @@
             // m_outputText
             // 
             this.m_outputText.AutoSize = true;
-            this.m_outputText.Location = new System.Drawing.Point(80, 0);
+            this.m_outputText.Location = new System.Drawing.Point(124, 0);
             this.m_outputText.Name = "m_outputText";
             this.m_outputText.Size = new System.Drawing.Size(62, 13);
             this.m_outputText.TabIndex = 6;
@@ -159,8 +159,8 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.33649F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.66351F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.32472F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.67528F));
             this.tableLayoutPanel2.Controls.Add(this.Output, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.m_outputText, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(18, 46);
@@ -174,8 +174,8 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.33649F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.66351F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.32472F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.67528F));
             this.tableLayoutPanel3.Controls.Add(this.TargetDesktop, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.m_desktopLabel, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(18, 6);
@@ -196,17 +196,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(542, 23);
             this.flowLayoutPanel1.TabIndex = 12;
             // 
-            // m_ignoreFolders
-            // 
-            this.m_ignoreFolders.AutoSize = true;
-            this.m_ignoreFolders.Location = new System.Drawing.Point(217, 3);
-            this.m_ignoreFolders.Name = "m_ignoreFolders";
-            this.m_ignoreFolders.Size = new System.Drawing.Size(93, 17);
-            this.m_ignoreFolders.TabIndex = 4;
-            this.m_ignoreFolders.Text = "Ignore Folders";
-            this.m_ignoreFolders.UseVisualStyleBackColor = true;
-            this.m_ignoreFolders.CheckedChanged += new System.EventHandler(this.m_ignoreFolders_CheckedChanged);
-            // 
             // m_bUseSnapshots
             // 
             this.m_bUseSnapshots.AutoSize = true;
@@ -217,6 +206,17 @@
             this.m_bUseSnapshots.Text = "Use Snapshots";
             this.m_bUseSnapshots.UseVisualStyleBackColor = true;
             this.m_bUseSnapshots.CheckedChanged += new System.EventHandler(this.m_bUseSnapshots_CheckedChanged);
+            // 
+            // m_ignoreFolders
+            // 
+            this.m_ignoreFolders.AutoSize = true;
+            this.m_ignoreFolders.Location = new System.Drawing.Point(217, 3);
+            this.m_ignoreFolders.Name = "m_ignoreFolders";
+            this.m_ignoreFolders.Size = new System.Drawing.Size(93, 17);
+            this.m_ignoreFolders.TabIndex = 4;
+            this.m_ignoreFolders.Text = "Ignore Folders";
+            this.m_ignoreFolders.UseVisualStyleBackColor = true;
+            this.m_ignoreFolders.CheckedChanged += new System.EventHandler(this.m_ignoreFolders_CheckedChanged);
             // 
             // BinItWindow
             // 

@@ -25,7 +25,7 @@ namespace BinIt
             // delete me 
             //Properties.Settings.Default.Reset();
 
-
+            this.m_outputText.Text = "Initialized";
             this.m_ignoreShortcuts.Checked = Properties.Settings.Default.IgnoreShortcuts;
             this.m_ignoreFolders.Checked = Properties.Settings.Default.IgnoreFolders;
             this.m_bUseSnapshots.Checked = Properties.Settings.Default.UseSnapshots;
