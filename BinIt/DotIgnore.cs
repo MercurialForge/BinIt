@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BinIt
 {
@@ -15,11 +16,16 @@ namespace BinIt
         private List<string> m_extentions = new List<string>();
         private List<string> m_directories = new List<string>();
 
-        private const string DotIgnoreFile = ".ignore";
+        private const string DotIgnoreFileName = ".ignore";
 
-        public DotIgnore(string path)
+        public DotIgnore()
         {
-            Load(path + DotIgnoreFile);
+            Load(Application.StartupPath + "\\" + DotIgnoreFileName);
+        }
+
+        public void Reload ()
+        {
+            Load(Application.StartupPath + "\\" + DotIgnoreFileName);
         }
 
         private void Load(string path)

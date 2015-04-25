@@ -23,7 +23,7 @@ namespace BinIt
         {
             // initialize
             InitializeComponent();
-            m_ignore = new DotIgnore(Application.StartupPath);
+            m_ignore = new DotIgnore();
             m_desktop = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
             // tool tip generation
@@ -36,9 +36,6 @@ namespace BinIt
                                                         "and protect them from clean up when running BinIt");
 
 
-            // delete me 
-            //Properties.Settings.Default.Reset();
-
             this.m_outputText.Text = "Initialized";
             this.m_ignoreShortcuts.Checked = Properties.Settings.Default.IgnoreShortcuts;
             this.m_ignoreFolders.Checked = Properties.Settings.Default.IgnoreFolders;
@@ -47,7 +44,6 @@ namespace BinIt
             this.m_overwrite.Checked = Properties.Settings.Default.Overwrite;
             this.Snapshot.Enabled = this.m_bUseSnapshots.Checked;
             this.m_desktopLabel.Text = m_desktop.ToString();
-
 
             // check if last snapshot exists, if not display message.
             if (Properties.Settings.Default.LastSnapShot != new DateTime())
@@ -106,6 +102,9 @@ namespace BinIt
             m_succeddedCount = 0;
             m_failedCount = 0;
 
+            // reload DotIngore file
+            this.m_ignore.Reload();
+
             // create BinIt directory if it does not exist
             string BinIt = m_desktop.ToString() + "/" + "BinIt/";
             Directory.CreateDirectory(BinIt);
@@ -117,6 +116,7 @@ namespace BinIt
             // check all files
             foreach (FileInfo file in m_desktop.GetFiles())
             {
+                Console.WriteLine(file.Name);
                 // skip shortcuts
                 if (this.m_ignoreShortcuts.Checked)
                     if (file.Extension == ".lnk")
@@ -140,7 +140,10 @@ namespace BinIt
             {
                 foreach (DirectoryInfo dir in m_desktop.GetDirectories())
                 {
-                    Console.WriteLine("Desktop Dir: " + dir.Name);
+                    // skip BinIt
+                    if (dir.Name.ToLower() == "binit")
+                        continue;
+
                     // skip snapshot listings
                     if (snapshot.Contains(dir.ToString()))
                         continue;

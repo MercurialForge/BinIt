@@ -109,7 +109,7 @@
             // m_desktopLabel
             // 
             this.m_desktopLabel.AutoSize = true;
-            this.m_desktopLabel.Location = new System.Drawing.Point(98, 0);
+            this.m_desktopLabel.Location = new System.Drawing.Point(103, 0);
             this.m_desktopLabel.Name = "m_desktopLabel";
             this.m_desktopLabel.Size = new System.Drawing.Size(22, 13);
             this.m_desktopLabel.TabIndex = 4;
@@ -128,7 +128,7 @@
             // m_outputText
             // 
             this.m_outputText.AutoSize = true;
-            this.m_outputText.Location = new System.Drawing.Point(98, 0);
+            this.m_outputText.Location = new System.Drawing.Point(104, 0);
             this.m_outputText.Name = "m_outputText";
             this.m_outputText.Size = new System.Drawing.Size(62, 13);
             this.m_outputText.TabIndex = 6;
@@ -140,14 +140,14 @@
             this.SnapShotTimeStamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SnapShotTimeStamp.Location = new System.Drawing.Point(3, 0);
             this.SnapShotTimeStamp.Name = "SnapShotTimeStamp";
-            this.SnapShotTimeStamp.Size = new System.Drawing.Size(88, 13);
+            this.SnapShotTimeStamp.Size = new System.Drawing.Size(92, 13);
             this.SnapShotTimeStamp.TabIndex = 7;
-            this.SnapShotTimeStamp.Text = "Last Snapshot";
+            this.SnapShotTimeStamp.Text = "Last Snapshot:";
             // 
             // m_ssTimestamp
             // 
             this.m_ssTimestamp.AutoSize = true;
-            this.m_ssTimestamp.Location = new System.Drawing.Point(99, 0);
+            this.m_ssTimestamp.Location = new System.Drawing.Point(104, 0);
             this.m_ssTimestamp.Name = "m_ssTimestamp";
             this.m_ssTimestamp.Size = new System.Drawing.Size(33, 13);
             this.m_ssTimestamp.TabIndex = 8;
@@ -157,8 +157,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.8664F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.1336F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.89069F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.10931F));
             this.tableLayoutPanel1.Controls.Add(this.SnapShotTimeStamp, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.m_ssTimestamp, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(18, 26);
@@ -172,8 +172,8 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.41463F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.58537F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.87805F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.12195F));
             this.tableLayoutPanel2.Controls.Add(this.Output, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.m_outputText, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(18, 46);
@@ -187,8 +187,8 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.41463F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.58537F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.63415F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.36585F));
             this.tableLayoutPanel3.Controls.Add(this.TargetDesktop, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.m_desktopLabel, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(18, 6);
