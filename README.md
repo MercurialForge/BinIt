@@ -1,8 +1,8 @@
 # BinIt
 A desktop cleaner! 
 
-Author: Oliver Barraza
-Contact: Oliver@MercurialForge.com
+//Author: Oliver Barraza
+//Contact: Oliver@MercurialForge.com
 
 ###To Use:
 1. Clean desktop to your ideal state.
