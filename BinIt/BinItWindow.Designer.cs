@@ -41,8 +41,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.m_bUseSnapshots = new System.Windows.Forms.CheckBox();
             this.m_ignoreFolders = new System.Windows.Forms.CheckBox();
             this.m_overwrite = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -54,12 +52,18 @@
             this.tipKeepBoth = new System.Windows.Forms.ToolTip(this.components);
             this.tipBinIt = new System.Windows.Forms.ToolTip(this.components);
             this.tipSnapshot = new System.Windows.Forms.ToolTip(this.components);
+            this.tipUseIgnore = new System.Windows.Forms.ToolTip(this.components);
+            this.m_bUseSnapshots = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.m_useDotIgnore = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Snapshot
@@ -76,7 +80,7 @@
             // BinIt
             // 
             this.BinIt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BinIt.Location = new System.Drawing.Point(404, 121);
+            this.BinIt.Location = new System.Drawing.Point(181, 121);
             this.BinIt.Name = "BinIt";
             this.BinIt.Size = new System.Drawing.Size(157, 34);
             this.BinIt.TabIndex = 1;
@@ -181,7 +185,7 @@
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(410, 65);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(410, 57);
             this.tableLayoutPanel2.TabIndex = 10;
             // 
             // tableLayoutPanel3
@@ -199,25 +203,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(410, 14);
             this.tableLayoutPanel3.TabIndex = 11;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.m_bUseSnapshots);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(181, 130);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(157, 25);
-            this.flowLayoutPanel1.TabIndex = 12;
-            // 
-            // m_bUseSnapshots
-            // 
-            this.m_bUseSnapshots.AutoSize = true;
-            this.m_bUseSnapshots.Location = new System.Drawing.Point(3, 3);
-            this.m_bUseSnapshots.Name = "m_bUseSnapshots";
-            this.m_bUseSnapshots.Size = new System.Drawing.Size(98, 17);
-            this.m_bUseSnapshots.TabIndex = 5;
-            this.m_bUseSnapshots.Text = "Use Snapshots";
-            this.m_bUseSnapshots.UseVisualStyleBackColor = true;
-            this.m_bUseSnapshots.CheckedChanged += new System.EventHandler(this.m_bUseSnapshots_CheckedChanged);
-            // 
             // m_ignoreFolders
             // 
             this.m_ignoreFolders.AutoSize = true;
@@ -232,7 +217,7 @@
             // m_overwrite
             // 
             this.m_overwrite.AutoSize = true;
-            this.m_overwrite.Location = new System.Drawing.Point(3, 72);
+            this.m_overwrite.Location = new System.Drawing.Point(85, 3);
             this.m_overwrite.Name = "m_overwrite";
             this.m_overwrite.Size = new System.Drawing.Size(71, 17);
             this.m_overwrite.TabIndex = 6;
@@ -249,14 +234,13 @@
             this.groupBox1.Size = new System.Drawing.Size(127, 109);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Settings";
+            this.groupBox1.Text = "Options";
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.m_ignoreShortcuts);
             this.flowLayoutPanel2.Controls.Add(this.m_ignoreFolders);
-            this.flowLayoutPanel2.Controls.Add(this.m_keepBoth);
-            this.flowLayoutPanel2.Controls.Add(this.m_overwrite);
+            this.flowLayoutPanel2.Controls.Add(this.m_useDotIgnore);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -266,7 +250,7 @@
             // m_keepBoth
             // 
             this.m_keepBoth.AutoSize = true;
-            this.m_keepBoth.Location = new System.Drawing.Point(3, 49);
+            this.m_keepBoth.Location = new System.Drawing.Point(3, 3);
             this.m_keepBoth.Name = "m_keepBoth";
             this.m_keepBoth.Size = new System.Drawing.Size(76, 17);
             this.m_keepBoth.TabIndex = 7;
@@ -274,13 +258,55 @@
             this.m_keepBoth.UseVisualStyleBackColor = true;
             this.m_keepBoth.CheckedChanged += new System.EventHandler(this.m_keepBoth_CheckedChanged);
             // 
+            // m_bUseSnapshots
+            // 
+            this.m_bUseSnapshots.AutoSize = true;
+            this.m_bUseSnapshots.Location = new System.Drawing.Point(46, 98);
+            this.m_bUseSnapshots.Name = "m_bUseSnapshots";
+            this.m_bUseSnapshots.Size = new System.Drawing.Size(98, 17);
+            this.m_bUseSnapshots.TabIndex = 5;
+            this.m_bUseSnapshots.Text = "Use Snapshots";
+            this.m_bUseSnapshots.UseVisualStyleBackColor = true;
+            this.m_bUseSnapshots.CheckedChanged += new System.EventHandler(this.m_bUseSnapshots_CheckedChanged);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.m_keepBoth);
+            this.flowLayoutPanel1.Controls.Add(this.m_overwrite);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 13);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(205, 21);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.flowLayoutPanel1);
+            this.groupBox2.Location = new System.Drawing.Point(344, 115);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(217, 40);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Merge Settings";
+            // 
+            // m_useDotIgnore
+            // 
+            this.m_useDotIgnore.AutoSize = true;
+            this.m_useDotIgnore.Location = new System.Drawing.Point(3, 49);
+            this.m_useDotIgnore.Name = "m_useDotIgnore";
+            this.m_useDotIgnore.Size = new System.Drawing.Size(80, 17);
+            this.m_useDotIgnore.TabIndex = 6;
+            this.m_useDotIgnore.Text = "Use .ignore";
+            this.m_useDotIgnore.UseVisualStyleBackColor = true;
+            this.m_useDotIgnore.CheckedChanged += new System.EventHandler(this.m_useDotIgnore_CheckedChanged);
+            // 
             // BinItWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 162);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.m_bUseSnapshots);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -290,6 +316,7 @@
             this.MinimumSize = new System.Drawing.Size(592, 200);
             this.Name = "BinItWindow";
             this.Padding = new System.Windows.Forms.Padding(3);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BinIt - Desktop Clean Up";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -297,12 +324,14 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -320,9 +349,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox m_ignoreFolders;
-        private System.Windows.Forms.CheckBox m_bUseSnapshots;
         private System.Windows.Forms.CheckBox m_overwrite;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
@@ -333,6 +360,11 @@
         private System.Windows.Forms.ToolTip tipKeepBoth;
         private System.Windows.Forms.ToolTip tipBinIt;
         private System.Windows.Forms.ToolTip tipSnapshot;
+        private System.Windows.Forms.ToolTip tipUseIgnore;
+        private System.Windows.Forms.CheckBox m_bUseSnapshots;
+        private System.Windows.Forms.CheckBox m_useDotIgnore;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

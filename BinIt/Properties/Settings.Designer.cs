@@ -84,7 +84,7 @@ namespace BinIt.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UseSnapshots {
             get {
                 return ((bool)(this["UseSnapshots"]));
@@ -115,6 +115,18 @@ namespace BinIt.Properties {
             }
             set {
                 this["KeepBoth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseDotIgnore {
+            get {
+                return ((bool)(this["UseDotIgnore"]));
+            }
+            set {
+                this["UseDotIgnore"] = value;
             }
         }
     }

@@ -57,11 +57,11 @@ namespace BinIt
 
                 // file extentions
                 else if (line.StartsWith("*.") || line.StartsWith("."))
-                    m_extentions.Add(line.TrimStart('*'));
+                    m_extentions.Add(line.TrimStart('*').ToLower());
 
                 // directory
                 else if (line.EndsWith("/"))
-                    m_directories.Add(line.TrimEnd('/'));
+                    m_directories.Add(line.TrimEnd('/').ToLower());
 
                 // invalid
                 else

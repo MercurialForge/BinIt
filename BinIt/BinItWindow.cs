@@ -31,30 +31,26 @@ namespace BinIt
             this.tipFolders.SetToolTip(this.m_ignoreFolders, "Ignore all folders on the desktop");
             this.tipKeepBoth.SetToolTip(this.m_keepBoth, "Keep files with identical names by appending \"_dup\"");
             this.tipOverwrite.SetToolTip(this.m_overwrite, "Overwrites files if already present in BinIt folder");
+            this.tipOverwrite.SetToolTip(this.m_useDotIgnore, "Protect extentions and directories listed in .ignore");
             this.tipBinIt.SetToolTip(this.BinIt, "Stash all unwanted files on your desktop in a BinIt folder");
             this.tipSnapshot.SetToolTip(this.Snapshot, "Record all files and folders currently on your desktop" + Environment.NewLine +
                                                         "and protect them from clean up when running BinIt");
 
 
-            this.m_outputText.Text = "Initialized";
             this.m_ignoreShortcuts.Checked = Properties.Settings.Default.IgnoreShortcuts;
             this.m_ignoreFolders.Checked = Properties.Settings.Default.IgnoreFolders;
             this.m_bUseSnapshots.Checked = Properties.Settings.Default.UseSnapshots;
             this.m_keepBoth.Checked = Properties.Settings.Default.KeepBoth;
             this.m_overwrite.Checked = Properties.Settings.Default.Overwrite;
+            this.m_useDotIgnore.Checked = Properties.Settings.Default.UseDotIgnore;
             this.Snapshot.Enabled = this.m_bUseSnapshots.Checked;
             this.m_desktopLabel.Text = m_desktop.ToString();
+            this.m_outputText.Text = "Initialized";
 
             // check if last snapshot exists, if not display message.
             if (Properties.Settings.Default.LastSnapShot != new DateTime())
             {
                 this.m_ssTimestamp.Text = Properties.Settings.Default.LastSnapShot.ToString();
-            }
-
-            if (Properties.Settings.Default.Snapshot == "")
-            {
-                this.BinIt.Enabled = false;
-                this.m_outputText.Text = "Looks like you don't have a snapshot.";
             }
         }
 
@@ -128,8 +124,9 @@ namespace BinIt
                         continue;
 
                 // skip .ignore extentions
-                if (m_ignore.Extentions.Contains(file.Extension))
-                    continue;
+                if (this.m_useDotIgnore.Checked)
+                    if (m_ignore.Extentions.Contains(file.Extension.ToLower()))
+                        continue;
 
                 // move
                 Internal_MoveAndOverwrite(file);
@@ -145,19 +142,21 @@ namespace BinIt
                         continue;
 
                     // skip snapshot listings
-                    if (snapshot.Contains(dir.ToString()))
-                        continue;
+                    if (this.m_bUseSnapshots.Checked)
+                        if (snapshot.Contains(dir.ToString()))
+                            continue;
 
                     // skip .ingore directories
-                    if(m_ignore.Directories.Contains(dir.Name))
-                        continue;
+                    if (this.m_useDotIgnore.Checked)
+                        if (m_ignore.Directories.Contains(dir.Name.ToLower()))
+                            continue;
 
                     // move
                     Internal_MoveAndOverwrite(dir);
                 }
             }
             // display results
-            if(m_succeddedCount + m_failedCount == 0)
+            if (m_succeddedCount + m_failedCount == 0)
             {
                 this.m_outputText.Text = "Nothing to BinIt";
             }
@@ -165,9 +164,9 @@ namespace BinIt
             {
                 this.m_outputText.Text = string.Format("{0} suceeded." + Environment.NewLine + "{1} failed.", m_succeddedCount, m_failedCount);
             }
-            if(m_failedCount != 0)
+            if (m_failedCount != 0)
             {
-                this.m_outputText.Text += " The files or directories remaining are too long in name.";
+                this.m_outputText.Text += " File already exists or resulting name is too long.";
             }
         }
 
@@ -188,10 +187,6 @@ namespace BinIt
             Properties.Settings.Default.UseSnapshots = this.m_bUseSnapshots.Checked;
             Properties.Settings.Default.Save();
             Snapshot.Enabled = this.m_bUseSnapshots.Checked;
-            if (Properties.Settings.Default.Snapshot == "")
-            {
-                BinIt.Enabled = !this.m_bUseSnapshots.Checked;
-            }
         }
 
         private void m_overwrite_CheckedChanged(object sender, EventArgs e)
@@ -207,11 +202,17 @@ namespace BinIt
             this.m_overwrite.Enabled = !this.m_keepBoth.Checked;
         }
 
+        private void m_useDotIgnore_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.UseDotIgnore = this.m_useDotIgnore.Checked;
+            Properties.Settings.Default.Save();
+        }
+
         private void Internal_MoveAndOverwrite(FileInfo file)
         {
             FileInfo MoveFrom = file;
             FileInfo MoveTo = new FileInfo(m_desktop.ToString() + "\\" + "BinIt\\" + MoveFrom.Name);
-            if(FileHelper.MoveAndOverwrite(MoveFrom, MoveTo))
+            if (FileHelper.MoveAndOverwrite(MoveFrom, MoveTo))
             {
                 m_succeddedCount++;
             }
