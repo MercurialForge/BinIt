@@ -156,7 +156,6 @@ namespace BinIt
                     Internal_MoveAndOverwrite(dir);
                 }
             }
-
             // display results
             if(m_succeddedCount + m_failedCount == 0)
             {

@@ -67,6 +67,7 @@ namespace BinIt
                 else
                     continue;
             }
+            file.Close();
         }
 
     }

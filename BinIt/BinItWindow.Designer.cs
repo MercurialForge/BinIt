@@ -109,7 +109,7 @@
             // m_desktopLabel
             // 
             this.m_desktopLabel.AutoSize = true;
-            this.m_desktopLabel.Location = new System.Drawing.Point(103, 0);
+            this.m_desktopLabel.Location = new System.Drawing.Point(104, 0);
             this.m_desktopLabel.Name = "m_desktopLabel";
             this.m_desktopLabel.Size = new System.Drawing.Size(22, 13);
             this.m_desktopLabel.TabIndex = 4;
@@ -128,7 +128,7 @@
             // m_outputText
             // 
             this.m_outputText.AutoSize = true;
-            this.m_outputText.Location = new System.Drawing.Point(104, 0);
+            this.m_outputText.Location = new System.Drawing.Point(105, 0);
             this.m_outputText.Name = "m_outputText";
             this.m_outputText.Size = new System.Drawing.Size(62, 13);
             this.m_outputText.TabIndex = 6;
@@ -181,7 +181,7 @@
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(410, 66);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(410, 65);
             this.tableLayoutPanel2.TabIndex = 10;
             // 
             // tableLayoutPanel3
