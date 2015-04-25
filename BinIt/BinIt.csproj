@@ -50,7 +50,9 @@
     <Compile Include="BinItWindow.Designer.cs">
       <DependentUpon>BinItWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="INIData.cs" />
+    <Compile Include="DotIgnore.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="IniFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BinItWindow.resx">
