@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace BinIt
+namespace BinIt2
 {
     public static class FileHelper
     {
@@ -16,7 +16,7 @@ namespace BinIt
         {
             if (targetFile.Exists)
             {
-                if(Properties.Settings.Default.KeepBoth)
+                if (Properties.Settings.Default.KeepBoth)
                 {
                     while (targetFile.Exists)
                     {

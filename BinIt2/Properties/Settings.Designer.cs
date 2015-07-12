@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BinIt.Properties {
+namespace BinIt2.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,13 +25,25 @@ namespace BinIt.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Desktop {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool KeepBoth {
             get {
-                return ((string)(this["Desktop"]));
+                return ((bool)(this["KeepBoth"]));
             }
             set {
-                this["Desktop"] = value;
+                this["KeepBoth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Overwrite {
+            get {
+                return ((bool)(this["Overwrite"]));
+            }
+            set {
+                this["Overwrite"] = value;
             }
         }
         
@@ -97,30 +109,6 @@ namespace BinIt.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Overwrite {
-            get {
-                return ((bool)(this["Overwrite"]));
-            }
-            set {
-                this["Overwrite"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool KeepBoth {
-            get {
-                return ((bool)(this["KeepBoth"]));
-            }
-            set {
-                this["KeepBoth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool UseDotIgnore {
             get {
                 return ((bool)(this["UseDotIgnore"]));

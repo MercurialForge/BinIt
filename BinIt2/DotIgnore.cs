@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
 
-namespace BinIt
+namespace BinIt2
 {
     public class DotIgnore
     {
@@ -20,12 +16,13 @@ namespace BinIt
 
         public DotIgnore()
         {
-            Load(Application.StartupPath + "\\" + DotIgnoreFileName);
+            Load(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName);
+            
         }
 
-        public void Reload ()
+        public void Reload()
         {
-            Load(Application.StartupPath + "\\" + DotIgnoreFileName);
+            Load(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName);
         }
 
         private void Load(string path)

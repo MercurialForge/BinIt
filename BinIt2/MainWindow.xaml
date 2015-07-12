@@ -1,0 +1,31 @@
+﻿<Window x:Name="TheWindow" x:Class="BinIt2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BinIt - Desktop CleanUp Application" Height="222" Width="755" ResizeMode="NoResize">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="63" Margin="10,117,0,0" VerticalAlignment="Top" Width="209">
+            <CheckBox x:Name="m_bUseSnapshots" Content="Use Snapshot" Margin="0,10,101,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98" Checked="m_bUseSnapshots_CheckedChanged" Unchecked="m_bUseSnapshots_CheckedChanged"/>
+            <Button x:Name="Snapshot" Content="Snapshot" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="98" Click="Click_Snapshot"/>
+            <Button x:Name="BinIt" Content="BinIt" HorizontalAlignment="Left" Margin="123,31,0,0" VerticalAlignment="Top" Width="75" Click="Click_BinIt"/>
+        </Grid>
+        <GroupBox Header="Options" Margin="0,8,10,0" HorizontalAlignment="Right" Width="145" Height="105" VerticalAlignment="Top">
+            <Grid Margin="0,0,-2,0">
+                <CheckBox x:Name="m_ignoreShortcuts" Content="Ignore Shortcuts" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="m_ignoreShortcuts_CheckedChanged" Unchecked="m_ignoreShortcuts_CheckedChanged"/>
+                <CheckBox x:Name="m_ignoreFolders" Content="Ignore Folders" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Checked="m_ignoreFolders_CheckedChanged" Unchecked="m_ignoreFolders_CheckedChanged"/>
+                <CheckBox x:Name="m_useDotIgnore" Content="Use .ignore" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Checked="m_useDotIgnore_CheckedChanged" Unchecked="m_useDotIgnore_CheckedChanged"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Output Log" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="101" Width="579">
+            <ScrollViewer>
+                <TextBlock x:Name="OutputLog" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="696"/>
+            </ScrollViewer>
+        </GroupBox>
+        <GroupBox Header="Merge Settings" HorizontalAlignment="Left" Margin="500,127,0,0" VerticalAlignment="Top" Height="53" Width="230">
+            <Grid HorizontalAlignment="Left" Height="57" Margin="0,0,-2,0" VerticalAlignment="Top" Width="263">
+                <CheckBox x:Name="m_keepBoth" Content="Keep Both" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="m_keepBoth_CheckedChanged" Unchecked="m_keepBoth_CheckedChanged"/>
+                <CheckBox x:Name="m_overwrite" Content="Overwrite" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="m_overwrite_CheckedChanged" Unchecked="m_overwrite_CheckedChanged"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>
