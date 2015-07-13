@@ -1,6 +1,9 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System;
+using System.Collections.Specialized;
 
 namespace BinIt2
 {
@@ -17,7 +20,15 @@ namespace BinIt2
         public DotIgnore()
         {
             Load(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName);
-            
+            if (Properties.Settings.Default.FirstBoot)
+            {
+                Properties.Settings.Default.FirstBoot = false;
+                using (StreamWriter file = new StreamWriter(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName))
+                {
+                    file.WriteLine("*.afiletype");
+                    file.WriteLine("/ADirectoryOrFolder");
+                }
+            }
         }
 
         public void Reload()
@@ -34,6 +45,35 @@ namespace BinIt2
             else
             {
                 Read(new StreamReader(path));
+            }
+        }
+
+        public void ReadToLog(TextBox log)
+        {
+            string line;
+            using (StreamReader file = new StreamReader(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+                    log.Text += line + Environment.NewLine;
+                }
+            }
+        }
+
+        public void Save(TextBox log)
+        {
+            StringCollection lines = new StringCollection();
+            int lineCount = log.LineCount;
+
+            for (int line = 0; line < lineCount; line++)
+                lines.Add(log.GetLineText(line));
+
+            using (StreamWriter file = new StreamWriter(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName))
+            {
+                for (int i = 0; i < lineCount; i++)
+                {
+                    file.Write(lines[i]);
+                }
             }
         }
 

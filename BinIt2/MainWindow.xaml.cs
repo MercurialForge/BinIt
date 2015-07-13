@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BinIt2
 {
@@ -22,52 +14,54 @@ namespace BinIt2
     public partial class MainWindow : Window
     {
 
-        private DirectoryInfo m_desktop;
-        private int m_succeddedCount = 0;
-        private int m_failedCount = 0;
+        static DirectoryInfo m_desktop;
         private DotIgnore m_ignore;
 
         public MainWindow()
         {
             InitializeComponent();
+
             m_ignore = new DotIgnore();
+            m_ignore.ReadToLog(this.m_dotIgnoreTextBox);
+            this.m_dotIgnoreTab.Header = ".ignore";
+            this.m_DotIgnoreSave.IsEnabled = false;
+
             m_desktop = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-            Properties.Settings.Default.Reset();
 
             // tool tip generation
-            this.m_bUseSnapshots.ToolTip = "Ignore all shortcuts on the desktop";
+            this.m_useSnapshots.ToolTip = "Ignore all shortcuts on the desktop";
             this.m_ignoreFolders.ToolTip = "Ignore all folders on the desktop";
             this.m_keepBoth.ToolTip = "Keep files with identical names by appending \"_dup\"";
             this.m_overwrite.ToolTip = "Overwrites files if already present in BinIt folder";
             this.m_useDotIgnore.ToolTip = "Protect extentions and directories listed in .ignore";
-            this.BinIt.ToolTip = "Stash all unwanted files on your desktop in a BinIt folder";
-            this.Snapshot.ToolTip = "Record all files and folders currently on your desktop" + Environment.NewLine +
+            this.m_BinIt.ToolTip = "Stash all unwanted files on your desktop in a BinIt folder";
+            this.m_Snapshot.ToolTip = "Record all files and folders currently on your desktop" + Environment.NewLine +
                                                         "and protect them from clean up when running BinIt";
 
             // Reintialize
             this.m_ignoreShortcuts.IsChecked = Properties.Settings.Default.IgnoreShortcuts;
             this.m_ignoreFolders.IsChecked = Properties.Settings.Default.IgnoreFolders;
-            this.m_bUseSnapshots.IsChecked = Properties.Settings.Default.UseSnapshots;
+            this.m_useSnapshots.IsChecked = Properties.Settings.Default.UseSnapshots;
             this.m_keepBoth.IsChecked = Properties.Settings.Default.KeepBoth;
             this.m_overwrite.IsChecked = Properties.Settings.Default.Overwrite;
             this.m_useDotIgnore.IsChecked = Properties.Settings.Default.UseDotIgnore;
-            this.Snapshot.IsEnabled = (bool)this.m_bUseSnapshots.IsChecked;
+            this.m_Snapshot.IsEnabled = this.m_useSnapshots.IsChecked.Value;
             //this.m_desktopLabel.Text = m_desktop.ToString();
 
             // check if last snapshot exists, if not display message.
             if (Properties.Settings.Default.LastSnapShot != new DateTime())
             {
-                this.OutputLog.Text += string.Format("The last Snapshot was taken on: {0}", Properties.Settings.Default.LastSnapShot.ToString()) + Environment.NewLine;
+                this.m_outputLog.Text += string.Format("The last Snapshot was taken on: {0}", Properties.Settings.Default.LastSnapShot.ToString()) + Environment.NewLine;
             }
             else
             {
-                if ((bool)this.m_bUseSnapshots.IsChecked)
+                if ((bool)this.m_useSnapshots.IsChecked)
                 {
-                    this.BinIt.IsEnabled = false;
+                    this.m_BinIt.IsEnabled = false;
                 }
-                this.OutputLog.Text += "No Snapshot found." + Environment.NewLine;
+                this.m_outputLog.Text += "No Snapshot found." + Environment.NewLine;
             }
-            this.OutputLog.Text += string.Format("Target Directory is: {0}", m_desktop.ToString()) + Environment.NewLine;
+            this.m_outputLog.Text += string.Format("Target Directory is: {0}", m_desktop.ToString()) + Environment.NewLine;
         }
 
         private void Click_Snapshot(object sender, RoutedEventArgs e)
@@ -97,22 +91,22 @@ namespace BinIt2
             // warn if snapshot is empty
             if (Properties.Settings.Default.Snapshot == "")
             {
-                this.OutputLog.Text = "Snapshot failed, please try again. (Or nothing is on you're desktop!)";
+                this.m_outputLog.Text = "Snapshot failed, please try again. (Or nothing is on you're desktop!)";
             }
             else
             {
-                this.OutputLog.Text += "Snapshot sucessfully taken." + Environment.NewLine;
-                if (!this.BinIt.IsEnabled)
+                this.m_outputLog.Text += "Snapshot sucessfully taken." + Environment.NewLine;
+                if (!this.m_BinIt.IsEnabled)
                 {
-                    this.BinIt.IsEnabled = true;
+                    this.m_BinIt.IsEnabled = true;
                 }
             }
         }
 
         private void Click_BinIt(object sender, RoutedEventArgs e)
         {
-            m_succeddedCount = 0;
-            m_failedCount = 0;
+            int m_succeeded = 0;
+            int m_failed = 0;
 
             // reload DotIngore file
             this.m_ignore.Reload();
@@ -128,148 +122,131 @@ namespace BinIt2
             // check all files
             foreach (FileInfo file in m_desktop.GetFiles())
             {
-                Console.WriteLine(file.Name);
                 // skip shortcuts
-                if (this.m_ignoreShortcuts.IsChecked == true)
+                if (this.m_ignoreShortcuts.IsChecked.Value)
                     if (file.Extension == ".lnk")
                         continue;
 
                 // skip snapshot listings
-                if (this.m_bUseSnapshots.IsChecked == true)
+                if (this.m_useSnapshots.IsChecked.Value)
                     if (snapshot.Contains(file.ToString()))
                         continue;
 
                 // skip .ignore extentions
-                if (this.m_useDotIgnore.IsChecked == true)
+                if (this.m_useDotIgnore.IsChecked.Value)
                     if (m_ignore.Extentions.Contains(file.Extension.ToLower()))
                         continue;
 
                 // move
-                try
-                {
-                    Internal_MoveAndOverwrite(file);
-                }
-                catch(Exception x)
-                {
-                    this.OutputLog.Text += "ERROR: A file to be Binned was found open and cannot be moved." + Environment.NewLine;
-                }
+                this.m_itemLog.Text += file.Name + Environment.NewLine;
+                int[] count;
+                count = FileHelper.MoveAndOverwrite(m_desktop.ToString(), file);
+                m_succeeded += count[0];
+                m_failed += count[1];
             }
 
             // check all directories
-            if (!this.m_ignoreFolders.IsChecked == true)
+            if (!this.m_ignoreFolders.IsChecked.Value)
             {
                 foreach (DirectoryInfo dir in m_desktop.GetDirectories())
                 {
-                    Console.WriteLine(dir.Name);
                     // skip BinIt
                     if (dir.Name.ToLower() == "binit")
                         continue;
 
                     // skip snapshot listings
-                    if (this.m_bUseSnapshots.IsChecked == true)
+                    if (this.m_useSnapshots.IsChecked.Value)
                         if (snapshot.Contains(dir.ToString()))
                             continue;
 
                     // skip .ingore directories
-                    if (this.m_useDotIgnore.IsChecked == true)
+                    if (this.m_useDotIgnore.IsChecked.Value)
                         if (m_ignore.Directories.Contains(dir.Name.ToLower()))
                             continue;
 
                     // move
-                    try
-                    {
-                        Internal_MoveAndOverwrite(dir);
-                    }
-                    catch (Exception x)
-                    {
-                        this.OutputLog.Text += "ERROR: A file to be Binned was found open and cannot be moved." + Environment.NewLine;
-                    }
+                    this.m_itemLog.Text += dir.Name + Environment.NewLine;
+                    int[] count;
+                    count = FileHelper.MoveAndOverwrite(m_desktop.ToString(), dir);
+                    m_succeeded += count[0];
+                    m_failed += count[1];
                 }
             }
             // display results
-            if (m_succeddedCount + m_failedCount == 0)
+            if (m_succeeded + m_failed == 0)
             {
-                this.OutputLog.Text += "Nothing to BinIt" + Environment.NewLine;
+                this.m_outputLog.Text += "Nothing to BinIt" + Environment.NewLine;
             }
             else
             {
-                this.OutputLog.Text += string.Format("{0} suceeded." + Environment.NewLine + "{1} failed.", m_succeddedCount, m_failedCount) + Environment.NewLine;
+                this.m_outputLog.Text += string.Format("{0} suceeded" + " - " + "{1} failed.", m_succeeded, m_failed) + Environment.NewLine;
             }
-            if (m_failedCount != 0)
+            if (m_failed != 0)
             {
-                this.OutputLog.Text += " File already exists or resulting name is too long." + Environment.NewLine;
+                this.m_outputLog.Text += string.Format("{0} File(s) failed because they exists or are currently open.", m_failed) + Environment.NewLine;
             }
         }
 
         private void m_ignoreShortcuts_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.IgnoreShortcuts = (bool)this.m_ignoreShortcuts.IsChecked;
+            Properties.Settings.Default.IgnoreShortcuts = this.m_ignoreShortcuts.IsChecked.Value;
             Properties.Settings.Default.Save();
         }
 
         private void m_ignoreFolders_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.IgnoreFolders = (bool)this.m_ignoreFolders.IsChecked;
+            Properties.Settings.Default.IgnoreFolders = this.m_ignoreFolders.IsChecked.Value;
             Properties.Settings.Default.Save();
         }
 
         private void m_bUseSnapshots_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.UseSnapshots = (bool)this.m_bUseSnapshots.IsChecked;
+            Properties.Settings.Default.UseSnapshots = this.m_useSnapshots.IsChecked.Value;
             Properties.Settings.Default.Save();
-            Snapshot.IsEnabled = (bool)this.m_bUseSnapshots.IsChecked;
+            m_Snapshot.IsEnabled = this.m_useSnapshots.IsChecked.Value;
 
             if (Properties.Settings.Default.LastSnapShot == new DateTime())
             {
-                this.BinIt.IsEnabled = !(bool)this.m_bUseSnapshots.IsChecked;
+                this.m_BinIt.IsEnabled = !this.m_useSnapshots.IsChecked.Value;
             }
         }
 
         private void m_overwrite_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.Overwrite = (bool)this.m_overwrite.IsChecked;
+            Properties.Settings.Default.Overwrite = this.m_overwrite.IsChecked.Value;
             Properties.Settings.Default.Save();
         }
 
         private void m_keepBoth_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.KeepBoth = (bool)this.m_keepBoth.IsChecked;
+            Properties.Settings.Default.KeepBoth = this.m_keepBoth.IsChecked.Value;
             Properties.Settings.Default.Save();
-            this.m_overwrite.IsEnabled = !(bool)this.m_keepBoth.IsChecked;
+            this.m_overwrite.IsEnabled = !this.m_keepBoth.IsChecked.Value;
         }
 
         private void m_useDotIgnore_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.UseDotIgnore = (bool)this.m_useDotIgnore.IsChecked;
+            Properties.Settings.Default.UseDotIgnore = this.m_useDotIgnore.IsChecked.Value;
             Properties.Settings.Default.Save();
         }
 
-        private void Internal_MoveAndOverwrite(FileInfo file)
+        private void Text_Updated(object sender, SizeChangedEventArgs e)
         {
-            FileInfo MoveFrom = file;
-            FileInfo MoveTo = new FileInfo(m_desktop.ToString() + "\\" + "BinIt\\" + MoveFrom.Name);
-            if (FileHelper.MoveAndOverwrite(MoveFrom, MoveTo))
-            {
-                m_succeddedCount++;
-            }
-            else
-            {
-                m_failedCount++;
-            }
+            this.m_scrollViewer.UpdateLayout();
+            this.m_scrollViewer.ScrollToVerticalOffset(this.m_outputLog.ActualHeight);
         }
 
-        private void Internal_MoveAndOverwrite(DirectoryInfo dir)
+        private void m_dotIgnoreTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            DirectoryInfo MoveFrom = dir;
-            DirectoryInfo MoveTo = new DirectoryInfo(m_desktop.ToString() + "\\" + "BinIt\\" + MoveFrom.Name);
-            if (FileHelper.MoveAndOverwrite(MoveFrom, MoveTo))
-            {
-                m_succeddedCount++;
-            }
-            else
-            {
-                m_failedCount++;
-            }
+            this.m_DotIgnoreSave.IsEnabled = true;
+            this.m_dotIgnoreTab.Header = ".ignore*";
+        }
+
+        private void m_DotIgnoreSave_Click(object sender, RoutedEventArgs e)
+        {
+            this.m_DotIgnoreSave.IsEnabled = false;
+            m_ignore.Save(this.m_dotIgnoreTextBox);
+            this.m_dotIgnoreTab.Header = ".ignore";
         }
     }
 }

@@ -12,7 +12,23 @@ namespace BinIt2
         /// Moves files. Will overwrite them if bOverwrite true.
         /// Returns the number of files or directories failed to move.
         /// </summary>
-        public static bool MoveAndOverwrite(FileInfo sourceFile, FileInfo targetFile)
+        public static int[] MoveAndOverwrite(string desktop, FileInfo file)
+        {
+            int[] count = new int[2];
+            FileInfo MoveFrom = file;
+            FileInfo MoveTo = new FileInfo(desktop + "\\" + "BinIt\\" + MoveFrom.Name);
+            if(Internal_MoveAndOverwrite(MoveFrom, MoveTo))
+            {
+                count[0] ++;
+            }
+            else
+            {
+                count[1] ++;
+            }
+            return count;
+        }
+
+        private static bool Internal_MoveAndOverwrite(FileInfo sourceFile, FileInfo targetFile)
         {
             if (targetFile.Exists)
             {
@@ -35,7 +51,7 @@ namespace BinIt2
                             targetFile = new FileInfo(newTargetFile);
                         }
                     }
-                    MoveAndOverwrite(sourceFile, targetFile);
+                    Internal_MoveAndOverwrite(sourceFile, targetFile);
                     return true;
                 }
                 if (Properties.Settings.Default.Overwrite)
@@ -61,7 +77,23 @@ namespace BinIt2
         /// Moves directories. If bOverwrite is true it will attempt to merge the files in both directories and delete the older empty directory.
         /// Returns the number of files or directories failed to move.
         /// </summary>
-        public static bool MoveAndOverwrite(DirectoryInfo sourceLocation, DirectoryInfo targetLocation)
+        public static int[] MoveAndOverwrite(string desktop, DirectoryInfo dir)
+        {
+            int[] count = new int[2];
+            DirectoryInfo MoveFrom = dir;
+            DirectoryInfo MoveTo = new DirectoryInfo(desktop + "\\" + "BinIt\\" + MoveFrom.Name);
+            if (Internal_MoveAndOverwrite(MoveFrom, MoveTo))
+            {
+                count[0]++;
+            }
+            else
+            {
+                count[1]++;
+            }
+            return count;
+        }
+
+        public static bool Internal_MoveAndOverwrite(DirectoryInfo sourceLocation, DirectoryInfo targetLocation)
         {
             if (targetLocation.Exists)
             {
@@ -69,7 +101,7 @@ namespace BinIt2
                 {
                     foreach (FileInfo fi in sourceLocation.GetFiles())
                     {
-                        MoveAndOverwrite(fi, new FileInfo(targetLocation.FullName + "\\" + fi.Name));
+                        Internal_MoveAndOverwrite(fi, new FileInfo(targetLocation.FullName + "\\" + fi.Name));
                     }
                 }
                 if (sourceLocation.GetFiles().Length == 0)
