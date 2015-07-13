@@ -35,8 +35,8 @@
             </TabItem>
         </TabControl>
         <Grid HorizontalAlignment="Left" Height="72" Margin="10,192,0,0" VerticalAlignment="Top" Width="729">
-            <GroupBox Header="Merge Settings" HorizontalAlignment="Left" Margin="499,0,0,-6" VerticalAlignment="Top" Height="53" Width="230">
-                <Grid HorizontalAlignment="Left" Height="57" Margin="0,0,-2,0" VerticalAlignment="Top" Width="263">
+            <GroupBox Header="Merge Settings" Margin="499,12,10,6" Height="53">
+                <Grid HorizontalAlignment="Left" Height="43" Margin="0,0,-2,-12" VerticalAlignment="Top" Width="220">
                     <CheckBox x:Name="m_keepBoth" Content="Keep Both" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="m_keepBoth_CheckedChanged" Unchecked="m_keepBoth_CheckedChanged"/>
                     <CheckBox x:Name="m_overwrite" Content="Overwrite" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="m_overwrite_CheckedChanged" Unchecked="m_overwrite_CheckedChanged"/>
                 </Grid>
