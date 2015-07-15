@@ -2,16 +2,21 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="TheWindow" x:Class="BinIt2.MainWindow"
-        Title="BinIt - Desktop CleanUp Application" Height="310" Width="755" ResizeMode="NoResize">
+        xmlns:p="clr-namespace:BinIt2.Properties"
+    xmlns:self ="clr-namespace:BinIt2"
+        Title="BinIt - Desktop CleanUp Application" Height="310" Width="755" ResizeMode="NoResize" Closing="OnClosing">
+    <Window.Resources>
+        <self:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Window.Resources>
     <Grid>
         <GroupBox Header="Options" Margin="0,22,10,0" HorizontalAlignment="Right" Width="145" Height="165" VerticalAlignment="Top">
             <Grid Margin="0,0,-2,0">
-                <CheckBox x:Name="m_ignoreShortcuts" Content="Ignore Shortcuts" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="m_ignoreShortcuts_CheckedChanged" Unchecked="m_ignoreShortcuts_CheckedChanged"/>
-                <CheckBox x:Name="m_ignoreFolders" Content="Ignore Folders" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Checked="m_ignoreFolders_CheckedChanged" Unchecked="m_ignoreFolders_CheckedChanged"/>
-                <CheckBox x:Name="m_useDotIgnore" Content="Use .ignore" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Checked="m_useDotIgnore_CheckedChanged" Unchecked="m_useDotIgnore_CheckedChanged"/>
+                <CheckBox x:Name="m_ignoreShortcuts" IsChecked="{Binding Source= {x:Static p:Settings.Default},Path=IgnoreShortcuts,Mode=TwoWay}" Content="Ignore Shortcuts" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="m_ignoreFolders" IsChecked="{Binding Source= {x:Static p:Settings.Default},Path=IgnoreFolders,Mode=TwoWay}" Content="Ignore Folders" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="m_useDotIgnore" IsChecked="{Binding Source= {x:Static p:Settings.Default},Path=UseDotIgnore,Mode=TwoWay}" Content="Use .ignore" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
-        <TabControl HorizontalAlignment="Left" Height="177" Margin="10,10,0,0" VerticalAlignment="Top" Width="570">
+        <TabControl HorizontalAlignment="Left" DataContext="{Binding Tabs}" Height="177" Margin="10,10,0,0" VerticalAlignment="Top" Width="570">
             <TabItem Header="Output Log">
                 <Grid Background="#FFFFFFFF">
                     <ScrollViewer x:Name="m_scrollViewer" >
@@ -29,7 +34,7 @@
             <TabItem x:Name="m_dotIgnoreTab" Header=".ignore">
                 <Grid Background="#FFFFFFFF">
                     <ScrollViewer x:Name="m_scrollViewer_DotIgnore" >
-                        <TextBox x:Name="m_dotIgnoreTextBox" AcceptsReturn="True" TextWrapping="Wrap" Margin="0" SizeChanged="Text_Updated" TextChanged="m_dotIgnoreTextBox_TextChanged"/>
+                        <TextBox x:Name="m_dotIgnoreTextBox" Text="{Binding Source= {x:Static p:Settings.Default},Path=DotIgnore,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Margin="0" SizeChanged="Text_Updated"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
@@ -37,15 +42,14 @@
         <Grid HorizontalAlignment="Left" Height="72" Margin="10,192,0,0" VerticalAlignment="Top" Width="729">
             <GroupBox Header="Merge Settings" Margin="499,12,10,6" Height="53">
                 <Grid HorizontalAlignment="Left" Height="43" Margin="0,0,-2,-12" VerticalAlignment="Top" Width="220">
-                    <CheckBox x:Name="m_keepBoth" Content="Keep Both" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="m_keepBoth_CheckedChanged" Unchecked="m_keepBoth_CheckedChanged"/>
-                    <CheckBox x:Name="m_overwrite" Content="Overwrite" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Checked="m_overwrite_CheckedChanged" Unchecked="m_overwrite_CheckedChanged"/>
+                    <RadioButton Content="Keep Both" IsChecked="{Binding Source= {x:Static p:Settings.Default},Path=KeepBoth,Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" GroupName="MergeSettings"/>
+                    <RadioButton Content="Overwrite" IsChecked="{Binding Source= {x:Static p:Settings.Default},Path=Overwrite,Mode=TwoWay}" HorizontalAlignment="Left" Margin="105,10,0,0" VerticalAlignment="Top" GroupName="MergeSettings"/>
                 </Grid>
             </GroupBox>
             <Grid HorizontalAlignment="Left" Height="63" Margin="0,1,0,0" VerticalAlignment="Top" Width="494">
-                <CheckBox x:Name="m_useSnapshots" Content="Use Snapshot" Margin="10,10,0,0" VerticalAlignment="Top" Checked="m_bUseSnapshots_CheckedChanged" Unchecked="m_bUseSnapshots_CheckedChanged" HorizontalAlignment="Left" Width="98"/>
-                <Button x:Name="m_Snapshot" Content="Snapshot" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="98" Click="Click_Snapshot"/>
-                <Button x:Name="m_BinIt" Content="BinIt" HorizontalAlignment="Left" Margin="123,31,0,0" VerticalAlignment="Top" Width="75" Click="Click_BinIt"/>
-                <Button x:Name="m_DotIgnoreSave" Content="Save .ignore" HorizontalAlignment="Left" Margin="214,31,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="m_DotIgnoreSave_Click"/>
+                <CheckBox x:Name="m_useSnapshots" IsChecked="{Binding Source= {x:Static p:Settings.Default},Path=UseSnapshot,Mode=TwoWay}" Content="Use Snapshot" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98"/>
+                <Button Content="Snapshot" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="98" Click="Click_Snapshot"/>
+                <Button IsEnabled="{Binding IsChecked,ElementName=m_useSnapshots, Converter={StaticResource InverseBooleanConverter}}" Content="BinIt" HorizontalAlignment="Left" Margin="123,31,0,0" VerticalAlignment="Top" Width="75" Click="Click_BinIt"/>
             </Grid>
         </Grid>
 

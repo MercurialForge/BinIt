@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,57 +12,30 @@ namespace BinIt2
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window , INotifyPropertyChanged
     {
 
         static DirectoryInfo m_desktop;
-        private DotIgnore m_ignore;
+        private DotIgnore m_ignore; 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public MainWindow()
         {
             InitializeComponent();
-
-            m_ignore = new DotIgnore();
-            m_ignore.ReadToLog(this.m_dotIgnoreTextBox);
-            this.m_dotIgnoreTab.Header = ".ignore";
-            this.m_DotIgnoreSave.IsEnabled = false;
-
+            DataContext = new MainWindowViewModel();
             m_desktop = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-
-            // tool tip generation
-            this.m_useSnapshots.ToolTip = "Ignore all shortcuts on the desktop";
-            this.m_ignoreFolders.ToolTip = "Ignore all folders on the desktop";
-            this.m_keepBoth.ToolTip = "Keep files with identical names by appending \"_dup\"";
-            this.m_overwrite.ToolTip = "Overwrites files if already present in BinIt folder";
-            this.m_useDotIgnore.ToolTip = "Protect extentions and directories listed in .ignore";
-            this.m_BinIt.ToolTip = "Stash all unwanted files on your desktop in a BinIt folder";
-            this.m_Snapshot.ToolTip = "Record all files and folders currently on your desktop" + Environment.NewLine +
-                                                        "and protect them from clean up when running BinIt";
-
-            // Reintialize
-            this.m_ignoreShortcuts.IsChecked = Properties.Settings.Default.IgnoreShortcuts;
-            this.m_ignoreFolders.IsChecked = Properties.Settings.Default.IgnoreFolders;
-            this.m_useSnapshots.IsChecked = Properties.Settings.Default.UseSnapshots;
-            this.m_keepBoth.IsChecked = Properties.Settings.Default.KeepBoth;
-            this.m_overwrite.IsChecked = Properties.Settings.Default.Overwrite;
-            this.m_useDotIgnore.IsChecked = Properties.Settings.Default.UseDotIgnore;
-            this.m_Snapshot.IsEnabled = this.m_useSnapshots.IsChecked.Value;
-            //this.m_desktopLabel.Text = m_desktop.ToString();
-
-            // check if last snapshot exists, if not display message.
-            if (Properties.Settings.Default.LastSnapShot != new DateTime())
-            {
-                this.m_outputLog.Text += string.Format("The last Snapshot was taken on: {0}", Properties.Settings.Default.LastSnapShot.ToString()) + Environment.NewLine;
-            }
-            else
-            {
-                if ((bool)this.m_useSnapshots.IsChecked)
-                {
-                    this.m_BinIt.IsEnabled = false;
-                }
-                this.m_outputLog.Text += "No Snapshot found." + Environment.NewLine;
-            }
             this.m_outputLog.Text += string.Format("Target Directory is: {0}", m_desktop.ToString()) + Environment.NewLine;
+        }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
 
         private void Click_Snapshot(object sender, RoutedEventArgs e)
@@ -96,10 +70,6 @@ namespace BinIt2
             else
             {
                 this.m_outputLog.Text += "Snapshot sucessfully taken." + Environment.NewLine;
-                if (!this.m_BinIt.IsEnabled)
-                {
-                    this.m_BinIt.IsEnabled = true;
-                }
             }
         }
 
@@ -187,66 +157,11 @@ namespace BinIt2
             }
         }
 
-        private void m_ignoreShortcuts_CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.IgnoreShortcuts = this.m_ignoreShortcuts.IsChecked.Value;
-            Properties.Settings.Default.Save();
-        }
-
-        private void m_ignoreFolders_CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.IgnoreFolders = this.m_ignoreFolders.IsChecked.Value;
-            Properties.Settings.Default.Save();
-        }
-
-        private void m_bUseSnapshots_CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.UseSnapshots = this.m_useSnapshots.IsChecked.Value;
-            Properties.Settings.Default.Save();
-            m_Snapshot.IsEnabled = this.m_useSnapshots.IsChecked.Value;
-
-            if (Properties.Settings.Default.LastSnapShot == new DateTime())
-            {
-                this.m_BinIt.IsEnabled = !this.m_useSnapshots.IsChecked.Value;
-            }
-        }
-
-        private void m_overwrite_CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.Overwrite = this.m_overwrite.IsChecked.Value;
-            Properties.Settings.Default.Save();
-        }
-
-        private void m_keepBoth_CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.KeepBoth = this.m_keepBoth.IsChecked.Value;
-            Properties.Settings.Default.Save();
-            this.m_overwrite.IsEnabled = !this.m_keepBoth.IsChecked.Value;
-        }
-
-        private void m_useDotIgnore_CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.UseDotIgnore = this.m_useDotIgnore.IsChecked.Value;
-            Properties.Settings.Default.Save();
-        }
-
         private void Text_Updated(object sender, SizeChangedEventArgs e)
         {
             this.m_scrollViewer.UpdateLayout();
             this.m_scrollViewer.ScrollToVerticalOffset(this.m_outputLog.ActualHeight);
         }
 
-        private void m_dotIgnoreTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            this.m_DotIgnoreSave.IsEnabled = true;
-            this.m_dotIgnoreTab.Header = ".ignore*";
-        }
-
-        private void m_DotIgnoreSave_Click(object sender, RoutedEventArgs e)
-        {
-            this.m_DotIgnoreSave.IsEnabled = false;
-            m_ignore.Save(this.m_dotIgnoreTextBox);
-            this.m_dotIgnoreTab.Header = ".ignore";
-        }
     }
 }
