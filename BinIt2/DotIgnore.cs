@@ -15,96 +15,40 @@ namespace BinIt2
         private List<string> m_extentions = new List<string>();
         private List<string> m_directories = new List<string>();
 
-        private const string DotIgnoreFileName = ".ignore";
-
         public DotIgnore()
         {
-            Load(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName);
-            if (Properties.Settings.Default.FirstBoot)
-            {
-                Properties.Settings.Default.FirstBoot = false;
-                using (StreamWriter file = new StreamWriter(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName))
-                {
-                    file.WriteLine("*.afiletype");
-                    file.WriteLine("/ADirectoryOrFolder");
-                }
-            }
+            Refresh();
         }
 
-        public void Reload()
+        public void Refresh()
         {
-            Load(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName);
-        }
+            string dotIgnore = Properties.Settings.Default.DotIgnore;
+            string[] dotIgnoreSplit = dotIgnore.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
-        private void Load(string path)
-        {
-            if (!File.Exists(path))
+            foreach (string str in dotIgnoreSplit)
             {
-                File.Create(path);
-            }
-            else
-            {
-                Read(new StreamReader(path));
-            }
-        }
-
-        public void ReadToLog(TextBox log)
-        {
-            string line;
-            using (StreamReader file = new StreamReader(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName))
-            {
-                while ((line = file.ReadLine()) != null)
-                {
-                    log.Text += line + Environment.NewLine;
-                }
-            }
-        }
-
-        public void Save(TextBox log)
-        {
-            StringCollection lines = new StringCollection();
-            int lineCount = log.LineCount;
-
-            for (int line = 0; line < lineCount; line++)
-                lines.Add(log.GetLineText(line));
-
-            using (StreamWriter file = new StreamWriter(System.AppDomain.CurrentDomain.BaseDirectory + "\\" + DotIgnoreFileName))
-            {
-                for (int i = 0; i < lineCount; i++)
-                {
-                    file.Write(lines[i]);
-                }
-            }
-        }
-
-        private void Read(TextReader file)
-        {
-            string line;
-            while ((line = file.ReadLine()) != null)
-            {
-                line = line.Trim();
+                string strTemp = str.Trim();
 
                 // skip empty lines
-                if (line == string.Empty)
+                if (string.IsNullOrWhiteSpace(strTemp))
                     continue;
 
                 // skip comments
-                else if (line.StartsWith(";") || line.StartsWith("#"))
+                else if (strTemp.StartsWith(";") || strTemp.StartsWith("#"))
                     continue;
 
                 // file extentions
-                else if (line.StartsWith("*.") || line.StartsWith("."))
-                    m_extentions.Add(line.TrimStart('*').ToLower());
+                else if (strTemp.StartsWith("*.") || strTemp.StartsWith("."))
+                    m_extentions.Add(strTemp.TrimStart('*').ToLower());
 
                 // directory
-                else if (line.EndsWith("/"))
-                    m_directories.Add(line.TrimEnd('/').ToLower());
+                else if (strTemp.EndsWith("/"))
+                    m_directories.Add(strTemp.TrimEnd('/').ToLower());
 
                 // invalid
                 else
                     continue;
             }
-            file.Close();
         }
 
     }

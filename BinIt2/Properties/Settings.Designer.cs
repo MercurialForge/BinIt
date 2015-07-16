@@ -132,7 +132,7 @@ namespace BinIt2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("*.filetype\r\n/AFileDirectory")]
+        [global::System.Configuration.DefaultSettingValueAttribute("*.filetype\r\n/ADirectoryOrFolder")]
         public string DotIgnore {
             get {
                 return ((string)(this["DotIgnore"]));

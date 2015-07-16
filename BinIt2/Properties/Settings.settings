@@ -31,7 +31,7 @@
     </Setting>
     <Setting Name="DotIgnore" Type="System.String" Scope="User">
       <Value Profile="(Default)">*.filetype
-/AFileDirectory</Value>
+/ADirectoryOrFolder</Value>
     </Setting>
   </Settings>
 </SettingsFile>

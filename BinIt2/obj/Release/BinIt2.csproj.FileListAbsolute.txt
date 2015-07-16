@@ -11,16 +11,18 @@ C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.csproj.GenerateResource.Cache
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.exe
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.pdb
-D:\Projects\C#\BinIt\BinIt2\bin\Release\BinIt2.exe.config
-D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.exe
-D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.pdb
-D:\Projects\C#\BinIt\BinIt2\bin\Release\BinIt2.exe
-D:\Projects\C#\BinIt\BinIt2\bin\Release\BinIt2.pdb
 D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.csprojResolveAssemblyReference.cache
 D:\Projects\C#\BinIt\BinIt2\obj\Release\MainWindow.baml
 D:\Projects\C#\BinIt\BinIt2\obj\Release\MainWindow.g.cs
 D:\Projects\C#\BinIt\BinIt2\obj\Release\App.g.cs
-D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2_MarkupCompile.cache
-D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.g.resources
 D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.Properties.Resources.resources
 D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.csproj.GenerateResource.Cache
+D:\Projects\C#\BinIt\BinIt2\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\Projects\C#\BinIt\BinIt2\bin\Release\BinIt.exe.config
+D:\Projects\C#\BinIt\BinIt2\bin\Release\BinIt.exe
+D:\Projects\C#\BinIt\BinIt2\bin\Release\BinIt.pdb
+D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt_MarkupCompile.cache
+D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt_MarkupCompile.lref
+D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt.g.resources
+D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt.exe
+D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt.pdb

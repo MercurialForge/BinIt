@@ -20,21 +20,21 @@
             <TabItem Header="Output Log">
                 <Grid Background="#FFFFFFFF">
                     <ScrollViewer x:Name="m_scrollViewer" >
-                        <TextBlock x:Name="m_outputLog" TextWrapping="Wrap" Width="557" SizeChanged="Text_Updated"/>
+                        <TextBlock x:Name="m_outputLog" Text="{Binding OutputLog}" SizeChanged="OutputText_Updated"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem Header="Item Log">
                 <Grid Background="#FFFFFFFF">
                     <ScrollViewer x:Name="m_scrollViewer_ItemLog" >
-                        <TextBlock x:Name="m_itemLog" TextWrapping="Wrap" Width="557" SizeChanged="Text_Updated"/>
+                        <TextBlock x:Name="m_itemLog" Text="{Binding ItemLog}" TextWrapping="Wrap" Width="557" SizeChanged="ItemText_Updated"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem x:Name="m_dotIgnoreTab" Header=".ignore">
                 <Grid Background="#FFFFFFFF">
                     <ScrollViewer x:Name="m_scrollViewer_DotIgnore" >
-                        <TextBox x:Name="m_dotIgnoreTextBox" Text="{Binding Source= {x:Static p:Settings.Default},Path=DotIgnore,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Margin="0" SizeChanged="Text_Updated"/>
+                        <TextBox x:Name="m_ignoreLog" Text="{Binding Source= {x:Static p:Settings.Default},Path=DotIgnore,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextWrapping="Wrap" Margin="0" SizeChanged="IgnoreText_Updated"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
