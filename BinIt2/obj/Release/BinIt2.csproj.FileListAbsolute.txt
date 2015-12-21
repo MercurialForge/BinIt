@@ -1,16 +1,9 @@
-C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\bin\Release\BinIt2.exe.config
-C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\bin\Release\BinIt2.exe
-C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\bin\Release\BinIt2.pdb
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.csprojResolveAssemblyReference.cache
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\MainWindow.baml
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\MainWindow.g.cs
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\App.g.cs
-C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2_MarkupCompile.cache
-C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.g.resources
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.Properties.Resources.resources
 C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.csproj.GenerateResource.Cache
-C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.exe
-C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.pdb
 D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt2.csprojResolveAssemblyReference.cache
 D:\Projects\C#\BinIt\BinIt2\obj\Release\MainWindow.baml
 D:\Projects\C#\BinIt\BinIt2\obj\Release\MainWindow.g.cs
@@ -26,3 +19,12 @@ D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt_MarkupCompile.lref
 D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt.g.resources
 D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt.exe
 D:\Projects\C#\BinIt\BinIt2\obj\Release\BinIt.pdb
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\bin\Release\BinIt.exe.config
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\bin\Release\BinIt.exe
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\bin\Release\BinIt.pdb
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt_MarkupCompile.cache
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt_MarkupCompile.lref
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt.g.resources
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt.exe
+C:\Users\Mercurial Forge\Desktop\My Projects\C#\BinIt\BinIt2\obj\Release\BinIt.pdb

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="TheWindow" x:Class="BinIt2.MainWindow"
         xmlns:p="clr-namespace:BinIt2.Properties"
     xmlns:self ="clr-namespace:BinIt2"
-        Title="BinIt - Desktop CleanUp Application" Height="310" Width="755" ResizeMode="NoResize" Closing="OnClosing">
+        Title="BinIt - Desktop CleanUp Application" Icon="Resources/favicon.ico" Height="310" Width="755" ResizeMode="NoResize" Closing="OnClosing">
     <Window.Resources>
         <self:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </Window.Resources>
